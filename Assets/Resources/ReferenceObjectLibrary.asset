@@ -25,3 +25,8 @@ MonoBehaviour:
     m_Name: Painting
     m_Entries:
     - {fileID: -6831329414088302235, guid: f6ad29c04c89dd64ca5af94eb053751a, type: 3}
+  - m_GuidLow: 5699366816051947890
+    m_GuidHigh: 13339895234850753699
+    m_Name: Laptop
+    m_Entries:
+    - {fileID: -6831329414088302235, guid: b6ffbda9ad518a448bd52b8f27d9a9cc, type: 3}
