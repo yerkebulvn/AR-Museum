@@ -12,11 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f3b71a771f04aef8057fae3964fd78, type: 3}
   m_Name: ReferenceObjectLibrary
   m_EditorClassIdentifier: 
-  m_GuidLow: 0
-  m_GuidHigh: 0
+  m_GuidLow: 5341137524241735457
+  m_GuidHigh: 13928238036716984980
   m_ReferenceObjects:
   - m_GuidLow: 4793251526040931911
     m_GuidHigh: 13583795954347495610
-    m_Name: 
+    m_Name: Thermos
     m_Entries:
     - {fileID: -6831329414088302235, guid: 44b3b6d1c6a4d6044a1f163521f33105, type: 3}
+  - m_GuidLow: 5432388907090286931
+    m_GuidHigh: 2547186118667811722
+    m_Name: Painting
+    m_Entries:
+    - {fileID: -6831329414088302235, guid: f6ad29c04c89dd64ca5af94eb053751a, type: 3}
