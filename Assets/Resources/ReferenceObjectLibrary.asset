@@ -30,3 +30,8 @@ MonoBehaviour:
     m_Name: Laptop
     m_Entries:
     - {fileID: -6831329414088302235, guid: 4997de2707283cf488e6ce38d711c5c2, type: 3}
+  - m_GuidLow: 5547581914313470327
+    m_GuidHigh: 8304802339658993820
+    m_Name: Olen
+    m_Entries:
+    - {fileID: -6831329414088302235, guid: e09f68863b8e05945ade02b7929dcfac, type: 3}
