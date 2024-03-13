@@ -15,23 +15,8 @@ MonoBehaviour:
   m_GuidLow: 5341137524241735457
   m_GuidHigh: 13928238036716984980
   m_ReferenceObjects:
-  - m_GuidLow: 4793251526040931911
-    m_GuidHigh: 13583795954347495610
-    m_Name: Thermos
-    m_Entries:
-    - {fileID: -6831329414088302235, guid: 44b3b6d1c6a4d6044a1f163521f33105, type: 3}
-  - m_GuidLow: 5432388907090286931
-    m_GuidHigh: 2547186118667811722
-    m_Name: Painting
-    m_Entries:
-    - {fileID: -6831329414088302235, guid: f6ad29c04c89dd64ca5af94eb053751a, type: 3}
   - m_GuidLow: 5699366816051947890
     m_GuidHigh: 13339895234850753699
     m_Name: Laptop
     m_Entries:
     - {fileID: -6831329414088302235, guid: 4997de2707283cf488e6ce38d711c5c2, type: 3}
-  - m_GuidLow: 5547581914313470327
-    m_GuidHigh: 8304802339658993820
-    m_Name: Olen
-    m_Entries:
-    - {fileID: -6831329414088302235, guid: e09f68863b8e05945ade02b7929dcfac, type: 3}
