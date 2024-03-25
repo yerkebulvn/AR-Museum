@@ -25,7 +25,7 @@ public class ScanController : MonoBehaviour
         // Например, если у вас есть кнопка "Start/Stop Scan", привяжите этот метод к ее событию OnClick.
 
         // Получите ссылку на компонент Button.
-        scanButton = GetComponent<Button>();
+        //scanButton = GetComponent<Button>();
 
         // Настройте начальный текст кнопки.
         scanButton.GetComponentInChildren<TMP_Text>().text = "START SCAN";
@@ -39,7 +39,7 @@ public class ScanController : MonoBehaviour
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
         });
 
-        trackedObjectManager = GetComponent<ARTrackedObjectManager>();
+        //trackedObjectManager = GetComponent<ARTrackedObjectManager>();
     }
     public void ToggleScan()
     {
