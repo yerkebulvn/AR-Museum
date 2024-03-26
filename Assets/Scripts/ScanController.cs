@@ -47,14 +47,14 @@ public class ScanController : MonoBehaviour
         {
             // Остановите сканирование объектов.
             trackedObjectManager.enabled = false;
-            Debug.LogWarning("Сканирование остановлено.");
+            Debug.LogWarning("***SCAN STOPPED***.");
             scanButton.GetComponentInChildren<TMP_Text>().text = "SCAN";
         }
         else
         {
             // Возобновите сканирование объектов.
             trackedObjectManager.enabled = true;
-            Debug.Log("Сканирование начато.");
+            Debug.Log("***SCAN STARTED***");
             scanButton.GetComponentInChildren<TMP_Text>().text = "STOP";
         }
 
@@ -90,7 +90,7 @@ public class ScanController : MonoBehaviour
         }
 
         //Update tracking position
-        foreach (var trackedObjectManager in eventArgs.updated)
+        /*foreach (var trackedObjectManager in eventArgs.updated)
         {
             foreach (var gameObject in ARObjects)
             {
@@ -99,12 +99,14 @@ public class ScanController : MonoBehaviour
                     gameObject.SetActive(trackedObjectManager.trackingState == TrackingState.Tracking);
                 }
             }
-        }
+        }*/
         // Если обнаружен хотя бы один объект, остановите сканирование.
         if (eventArgs.added.Count > 0)
         {
             trackedObjectManager.enabled = false;
-            Debug.Log("Объект обнаружен. Сканирование остановлено.");
+            Debug.Log("***Object detected. Scan stopped***");
+
+            scanButton.GetComponentInChildren<TMP_Text>().text = "SCAN";
 
             // Отправьте аналитическое событие в Firebase.
             FirebaseAnalytics.LogEvent("ObjectDetected", "ObjectName", eventArgs.added[0].referenceObject.name);
