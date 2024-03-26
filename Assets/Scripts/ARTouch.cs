@@ -42,7 +42,8 @@ public class ARTouch : MonoBehaviour
                     Vector3 pos = hit.point;
                     //pos.z += 0.25f;
                     //pos.y += 0.25f;
-                    Instantiate(popUpGameObject, pos, transform.rotation);
+                    //Instantiate(popUpGameObject, pos, transform.rotation);
+                    popUpGameObject.SetActive(true);
                 }/*
 
                 if (hit.transform.tag == "frogger")

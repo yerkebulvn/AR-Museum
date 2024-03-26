@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5246809, g: 0.4687639, b: 0.39093137, a: 1}
+  m_IndirectSpecularColor: {r: 0.51270604, g: 0.45598024, b: 0.37833676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -639,7 +639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ReferenceLibrary: {fileID: 11400000, guid: e07e4aec8796c624ebe5112540e24b0a, type: 2}
-  m_TrackedObjectPrefab: {fileID: 0}
+  m_TrackedObjectPrefab: {fileID: 5697459940439478203, guid: 7f762a837caccb54a84e3c162f547be2, type: 3}
 --- !u!114 &787975989
 MonoBehaviour:
   m_ObjectHideFlags: 0
