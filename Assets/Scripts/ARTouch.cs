@@ -8,6 +8,7 @@ public class ARTouch : MonoBehaviour
 
     public GameObject clickableSphere;
     public GameObject popUpGameObject;
+    public bool isActived = false;
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +44,14 @@ public class ARTouch : MonoBehaviour
                     //pos.z += 0.25f;
                     //pos.y += 0.25f;
                     //Instantiate(popUpGameObject, pos, transform.rotation);
-                    popUpGameObject.SetActive(true);
+                    if (isActived == false)
+                    {
+                        popUpGameObject.SetActive(true);
+                        isActived = true;
+                    }
+                    else { popUpGameObject.SetActive(false);
+                        isActived = false;
+                    }
                 }/*
 
                 if (hit.transform.tag == "frogger")
