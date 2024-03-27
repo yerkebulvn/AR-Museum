@@ -72,6 +72,7 @@ public class ImageScanControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(imageManager.enabled == true)
         OutputTracking();
     }
 

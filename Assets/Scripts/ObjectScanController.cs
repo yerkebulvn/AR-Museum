@@ -75,7 +75,7 @@ public class ScanController : MonoBehaviour
 
     private void Update()
     {
-        OutputTracking();
+        if (trackedObjectManager.enabled == true) OutputTracking();
     }
     void OutputTracking()
     {
