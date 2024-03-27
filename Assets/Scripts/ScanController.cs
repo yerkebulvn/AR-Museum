@@ -12,6 +12,7 @@ public class ScanController : MonoBehaviour
 {
     public GameObject[] ArPrefabs;
     [SerializeField] private ARTrackedObjectManager trackedObjectManager;
+    [SerializeField] private ARTrackedImageManager imageManager;
     private bool isScanning = false;
 
     List<GameObject> ARObjects = new List<GameObject>();
@@ -47,6 +48,7 @@ public class ScanController : MonoBehaviour
         {
             // Остановите сканирование объектов.
             trackedObjectManager.enabled = false;
+            imageManager.enabled = false;
             Debug.LogWarning("***SCAN STOPPED***.");
             scanButton.GetComponentInChildren<TMP_Text>().text = "SCAN";
         }
@@ -54,6 +56,7 @@ public class ScanController : MonoBehaviour
         {
             // Возобновите сканирование объектов.
             trackedObjectManager.enabled = true;
+            imageManager.enabled = true;
             Debug.Log("***SCAN STARTED***");
             scanButton.GetComponentInChildren<TMP_Text>().text = "STOP";
         }
@@ -65,12 +68,54 @@ public class ScanController : MonoBehaviour
     {
         // Подпишитесь на событие обнаружения объекта.
         trackedObjectManager.trackedObjectsChanged += OnTrackedObjectsChanged;
+        imageManager.trackedImagesChanged += OnTrackedImageChanged;
     }
 
     private void OnDisable()
     {
         // Отпишитесь от события обнаружения объекта.
         trackedObjectManager.trackedObjectsChanged -= OnTrackedObjectsChanged;
+        imageManager.trackedImagesChanged -= OnTrackedImageChanged;
+    }
+
+    private void OnTrackedImageChanged(ARTrackedImagesChangedEventArgs eventArgs)
+    {
+        foreach (var trackedImage in eventArgs.added)
+        {
+            foreach (var arPrefab in ArPrefabs)
+            {
+                if (trackedImage.referenceImage.name == arPrefab.name)
+                {
+                    Debug.Log("===Detected Image=== "+trackedImage.referenceImage.name);
+                    var newPrefab = Instantiate(arPrefab, trackedImage.transform);
+                    ARObjects.Add(newPrefab);
+                }
+            }
+        }
+
+
+        //Update tracking position
+        foreach (var trackedImage in eventArgs.updated)
+        {
+            foreach (var gameObject in ARObjects)
+            {
+                if (gameObject.name == trackedImage.name)
+                {
+                    gameObject.SetActive(trackedImage.trackingState == TrackingState.Tracking);
+                }
+            }
+        }
+
+        if (eventArgs.added.Count > 0)
+        {
+            imageManager.enabled = false;
+            Debug.Log("***Image detected. Scan stopped***");
+
+            scanButton.GetComponentInChildren<TMP_Text>().text = "SCAN";
+
+            // Отправьте аналитическое событие в Firebase.
+            FirebaseAnalytics.LogEvent("ObjectDetected", "ObjectName", eventArgs.added[0].referenceImage.name);
+        }
     }
 
     private void OnTrackedObjectsChanged(ARTrackedObjectsChangedEventArgs eventArgs)
@@ -90,7 +135,7 @@ public class ScanController : MonoBehaviour
         }
 
         //Update tracking position
-        /*foreach (var trackedObjectManager in eventArgs.updated)
+        foreach (var trackedObjectManager in eventArgs.updated)
         {
             foreach (var gameObject in ARObjects)
             {
@@ -99,7 +144,7 @@ public class ScanController : MonoBehaviour
                     gameObject.SetActive(trackedObjectManager.trackingState == TrackingState.Tracking);
                 }
             }
-        }*/
+        }
         // Если обнаружен хотя бы один объект, остановите сканирование.
         if (eventArgs.added.Count > 0)
         {
