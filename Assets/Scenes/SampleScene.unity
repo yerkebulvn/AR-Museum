@@ -896,7 +896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ReferenceLibrary: {fileID: 11400000, guid: e07e4aec8796c624ebe5112540e24b0a, type: 2}
-  m_TrackedObjectPrefab: {fileID: 5697459940439478203, guid: 7f762a837caccb54a84e3c162f547be2, type: 3}
+  m_TrackedObjectPrefab: {fileID: 0}
 --- !u!114 &787975989
 MonoBehaviour:
   m_ObjectHideFlags: 0
