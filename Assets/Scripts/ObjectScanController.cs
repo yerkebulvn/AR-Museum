@@ -1,6 +1,6 @@
 using Firebase;
 using Firebase.Analytics;
-using System.Collections;
+
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -12,12 +12,12 @@ public class ScanController : MonoBehaviour
 {
     public GameObject[] ArPrefabs;
     [SerializeField] private ARTrackedObjectManager trackedObjectManager;
-    [SerializeField] private ARTrackedImageManager imageManager;
     private bool isScanning = false;
 
     List<GameObject> ARObjects = new List<GameObject>();
 
     public Button scanButton;
+    public TMP_Text Infobox;
 
     private void Start()
     {
@@ -29,7 +29,7 @@ public class ScanController : MonoBehaviour
         //scanButton = GetComponent<Button>();
 
         // Настройте начальный текст кнопки.
-        scanButton.GetComponentInChildren<TMP_Text>().text = "START SCAN";
+        scanButton.GetComponentInChildren<TMP_Text>().text = "START OBJECT SCAN";
     }
 
     void Awake()
@@ -40,7 +40,6 @@ public class ScanController : MonoBehaviour
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
         });
 
-        //trackedObjectManager = GetComponent<ARTrackedObjectManager>();
     }
     public void ToggleScan()
     {
@@ -48,17 +47,15 @@ public class ScanController : MonoBehaviour
         {
             // Остановите сканирование объектов.
             trackedObjectManager.enabled = false;
-            imageManager.enabled = false;
-            Debug.LogWarning("***SCAN STOPPED***.");
-            scanButton.GetComponentInChildren<TMP_Text>().text = "SCAN";
+            Debug.LogWarning("*** OBJECTS SCAN STOPPED ***");
+            scanButton.GetComponentInChildren<TMP_Text>().text = "SCAN OBJECT";
         }
         else
         {
             // Возобновите сканирование объектов.
             trackedObjectManager.enabled = true;
-            imageManager.enabled = true;
-            Debug.Log("***SCAN STARTED***");
-            scanButton.GetComponentInChildren<TMP_Text>().text = "STOP";
+            Debug.Log("*** OBJECTS SCAN STARTED ***");
+            scanButton.GetComponentInChildren<TMP_Text>().text = "STOP OBJECTS SCAN";
         }
 
         isScanning = !isScanning;
@@ -68,85 +65,70 @@ public class ScanController : MonoBehaviour
     {
         // Подпишитесь на событие обнаружения объекта.
         trackedObjectManager.trackedObjectsChanged += OnTrackedObjectsChanged;
-        imageManager.trackedImagesChanged += OnTrackedImageChanged;
     }
 
     private void OnDisable()
     {
         // Отпишитесь от события обнаружения объекта.
         trackedObjectManager.trackedObjectsChanged -= OnTrackedObjectsChanged;
-        imageManager.trackedImagesChanged -= OnTrackedImageChanged;
     }
 
-    private void OnTrackedImageChanged(ARTrackedImagesChangedEventArgs eventArgs)
+    private void Update()
     {
-        foreach (var trackedImage in eventArgs.added)
+        OutputTracking();
+    }
+    void OutputTracking()
+    {
+        Infobox.text = "Tracking Objects Data: \n";
+
+        int i = 0;
+
+        foreach (var trackedObject in trackedObjectManager.trackables)
         {
-            foreach (var arPrefab in ArPrefabs)
+            Infobox.text += "Object: " + trackedObject.referenceObject.name + " "
+                + trackedObject.trackingState.ToString() + " "
+                + " \n";
+            if(trackedObject.trackingState == TrackingState.Limited)
             {
-                if (trackedImage.referenceImage.name == arPrefab.name)
-                {
-                    Debug.Log("===Detected Image=== "+trackedImage.referenceImage.name);
-                    var newPrefab = Instantiate(arPrefab, trackedImage.transform);
-                    ARObjects.Add(newPrefab);
-                }
+                ARObjects[i].SetActive(false);
             }
-        }
-
-
-        //Update tracking position
-        foreach (var trackedImage in eventArgs.updated)
-        {
-            foreach (var gameObject in ARObjects)
+            if (trackedObject.trackingState == TrackingState.Tracking)
             {
-                if (gameObject.name == trackedImage.name)
-                {
-                    gameObject.SetActive(trackedImage.trackingState == TrackingState.Tracking);
-                }
+                ARObjects[i].SetActive(true);
             }
-        }
-
-        if (eventArgs.added.Count > 0)
-        {
-            imageManager.enabled = false;
-            Debug.Log("***Image detected. Scan stopped***");
-
-            scanButton.GetComponentInChildren<TMP_Text>().text = "SCAN";
-
-            // Отправьте аналитическое событие в Firebase.
-            FirebaseAnalytics.LogEvent("ObjectDetected", "ObjectName", eventArgs.added[0].referenceImage.name);
+            i++;
         }
     }
-
     private void OnTrackedObjectsChanged(ARTrackedObjectsChangedEventArgs eventArgs)
     {
 
-        //Create object based on image tracked
-        foreach (var trackedObjectManager in eventArgs.added)
+        //Create object based on object tracked
+        foreach (var trackedObject in eventArgs.added)
         {
             foreach (var arPrefab in ArPrefabs)
             {
-                if (trackedObjectManager.referenceObject.name == arPrefab.name)
+                if (trackedObject.referenceObject.name == arPrefab.name)
                 {
-                    var newPrefab = Instantiate(arPrefab, trackedObjectManager.transform);
+                    var newPrefab = Instantiate(arPrefab, trackedObject.transform);
                     ARObjects.Add(newPrefab);
+                    FirebaseAnalytics.LogEvent("ObjectDetected", "ObjectName", trackedObject.referenceObject.name);
                 }
             }
         }
 
         //Update tracking position
-        foreach (var trackedObjectManager in eventArgs.updated)
+        foreach (var trackedObject in eventArgs.updated)
         {
             foreach (var gameObject in ARObjects)
             {
-                if (gameObject.name == trackedObjectManager.name)
+                if (gameObject.name == trackedObject.name)
                 {
-                    gameObject.SetActive(trackedObjectManager.trackingState == TrackingState.Tracking);
+                    gameObject.SetActive(trackedObject.trackingState == TrackingState.Tracking);
                 }
             }
         }
         // Если обнаружен хотя бы один объект, остановите сканирование.
-        if (eventArgs.added.Count > 0)
+        /*if (eventArgs.added.Count > 0)
         {
             trackedObjectManager.enabled = false;
             Debug.Log("***Object detected. Scan stopped***");
@@ -155,6 +137,6 @@ public class ScanController : MonoBehaviour
 
             // Отправьте аналитическое событие в Firebase.
             FirebaseAnalytics.LogEvent("ObjectDetected", "ObjectName", eventArgs.added[0].referenceObject.name);
-        }
+        }*/
     }
 }
