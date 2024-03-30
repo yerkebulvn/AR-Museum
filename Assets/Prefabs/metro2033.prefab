@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 4124637454143841058}
   m_Layer: 0
   m_Name: ClickableBlock
-  m_TagString: Untagged
+  m_TagString: Laptop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

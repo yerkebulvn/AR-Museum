@@ -111,7 +111,7 @@ public class ScanController : MonoBehaviour
                 {
                     var newPrefab = Instantiate(arPrefab, trackedObject.transform);
                     ARObjects.Add(newPrefab);
-                    FirebaseAnalytics.LogEvent("ObjectDetected", "ObjectName", trackedObject.referenceObject.name);
+                    FirebaseAnalytics.LogEvent("ObjectDetected", "ObjectName", trackedObject.referenceObject.name.ToString());
                 }
             }
         }

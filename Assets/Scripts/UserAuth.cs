@@ -85,6 +85,15 @@ public class UserAuth : MonoBehaviour
                 Debug.LogFormat("Firebase user created successfully: {0} ({1})",
                     result.User.DisplayName, result.User.UserId);
                 welcomeMSG.text = "Қосымшаға тіркелуіңіз сәтті өтті, " + result.User.Email.ToString();
+
+                //Sign Up Log to Analytics
+                Firebase.Analytics.FirebaseAnalytics.LogEvent(
+                    Firebase.Analytics.FirebaseAnalytics.EventSignUp,
+                        new Firebase.Analytics.Parameter[] {
+                        new Firebase.Analytics.Parameter(
+                            Firebase.Analytics.FirebaseAnalytics.ParameterMethod, task.Id),
+                    }
+                );
             });
         }
     }
@@ -132,6 +141,15 @@ public class UserAuth : MonoBehaviour
             Debug.LogFormat("User signed in successfully: {0} ({1})",
                 result.User.DisplayName, result.User.UserId);
             welcomeMSG.text = "Қош келдіңіз, " + result.User.Email.ToString();
+
+            //Log Event Login
+            Firebase.Analytics.FirebaseAnalytics.LogEvent(
+                Firebase.Analytics.FirebaseAnalytics.EventLogin,
+                    new Firebase.Analytics.Parameter[] {
+                    new Firebase.Analytics.Parameter(
+                        Firebase.Analytics.FirebaseAnalytics.ParameterMethod, task.Id),
+                }
+            );
         });
     }
 

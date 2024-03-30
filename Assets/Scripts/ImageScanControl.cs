@@ -112,7 +112,8 @@ public class ImageScanControl : MonoBehaviour
                     Debug.Log("***** Detected Image: " + trackedImage.referenceImage.name);
                     var newPrefab = Instantiate(arPrefab, trackedImage.transform);
                     aRObjects.Add(newPrefab);
-                    FirebaseAnalytics.LogEvent("ObjectDetected", "ObjectName", trackedImage.referenceImage.name);
+                    FirebaseAnalytics.LogEvent("ObjectDetected", "ObjectName", trackedImage.referenceImage.name.ToString());
+                    FirebaseAnalytics.LogEvent("DetectedImage", "ImageName", trackedImage.referenceImage.name.ToString());
                 }
             }
         }
