@@ -8,6 +8,7 @@ using UnityEngine.XR.ARFoundation;
 
 using Firebase.Analytics;
 using UnityEngine.XR.ARSubsystems;
+using System.Collections;
 
 
 public class ImageScanControl : MonoBehaviour
@@ -42,16 +43,13 @@ public class ImageScanControl : MonoBehaviour
         if (isScanning)
         {
             // Остановите сканирование объектов.
-            imageManager.enabled = false;
-            Debug.Log("*** IMAGE SCAN STOPPED ***.");
-            scanButton.GetComponentInChildren<TMP_Text>().text = "SCAN IMAGE";
+            stopScanImage();
         }
         else
         {
             // Возобновите сканирование объектов.
-            imageManager.enabled = true;
-            Debug.Log("*** IMAGE SCAN STARTED ***");
-            scanButton.GetComponentInChildren<TMP_Text>().text = "STOP SCAN IMAGE";
+            startScanImage();
+            
         }
 
         isScanning = !isScanning;
@@ -89,7 +87,7 @@ public class ImageScanControl : MonoBehaviour
                 + " \n";
             if (trackedImage.trackingState == TrackingState.Limited)
             {
-                aRObjects[i].SetActive(false);
+                StartCoroutine(routine: CoroutineSample(aRObjects[i]));
             }
             if (trackedImage.trackingState == TrackingState.Tracking)
             {
@@ -140,5 +138,23 @@ public class ImageScanControl : MonoBehaviour
             // Отправьте аналитическое событие в Firebase.
             FirebaseAnalytics.LogEvent("ObjectDetected", "ObjectName", eventArgs.added[0].referenceImage.name);
         }*/
+    }
+    void stopScanImage()
+    {
+        imageManager.enabled = false;
+        Debug.Log("*** IMAGE SCAN STOPPED ***");
+        scanButton.GetComponentInChildren<TMP_Text>().text = "SCAN IMAGE";
+    }
+    void startScanImage()
+    {
+        imageManager.enabled = true;
+        Debug.Log("*** IMAGE SCAN STARTED ***");
+        scanButton.GetComponentInChildren<TMP_Text>().text = "STOP SCAN IMAGE";
+    }
+
+    private IEnumerator CoroutineSample(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(10);
+        gameObject.SetActive(false);
     }
 }

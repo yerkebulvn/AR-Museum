@@ -12,12 +12,14 @@ public class AssistantConrtol : MonoBehaviour
     [Header("В ячейку перенесите позицию Ассистента")]
     public Transform AssistantPosition;
 
-    void Start()
+    void Awake()
     {
         // Появление Ассистента
         Assistant = Instantiate(AssistantPrefab, ARCamera.transform.position + new Vector3(0, 1f, 0), ARCamera.transform.rotation);
+        Debug.Log("--- Assistant Prefab Spawn ---");
         // Запуск отчёта времени
         StartCoroutine(routine: CoroutineSample());
+        Debug.Log("* Start counttime *");
     }
 
     void Update()
@@ -46,5 +48,6 @@ public class AssistantConrtol : MonoBehaviour
     {
         yield return new WaitForSeconds(60);
         Assistant.SetActive(false);
+        Debug.Log("--- Assistant Killed ---");
     }
 }

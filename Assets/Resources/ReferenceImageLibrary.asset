@@ -21,9 +21,9 @@ MonoBehaviour:
       m_GuidLow: 5705178305371370618
       m_GuidHigh: 12357758680651790731
     m_SerializedTextureGuid:
-      m_GuidLow: 8531162677371992909
-      m_GuidHigh: 3911416452929017800
-    m_Size: {x: 0.17, y: 0.23124336}
-    m_SpecifySize: 0
+      m_GuidLow: 5229820060581693821
+      m_GuidHigh: 13335137593798105640
+    m_Size: {x: 0.15438281, y: 0.21}
+    m_SpecifySize: 1
     m_Name: metro2033
     m_Texture: {fileID: 0}
