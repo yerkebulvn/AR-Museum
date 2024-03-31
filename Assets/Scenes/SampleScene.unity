@@ -557,6 +557,7 @@ MonoBehaviour:
   AssistantPrefab: {fileID: 8163164597331298718, guid: 6c2b700ab597299459c5cb97913c5dcc, type: 3}
   AssistantPosition: {fileID: 1930537605}
   AssistantControl: {fileID: 395972173}
+  btnAssistant: {fileID: 1088681757}
 --- !u!4 &395972175
 Transform:
   m_ObjectHideFlags: 0

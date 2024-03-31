@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AssistantConrtol : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class AssistantConrtol : MonoBehaviour
     [Header("В ячейку перенесите позицию Ассистента")]
     public Transform AssistantPosition;
     public GameObject AssistantControl;
+    public Button btnAssistant;
 
     void Awake()
     {
@@ -49,6 +52,8 @@ public class AssistantConrtol : MonoBehaviour
     {
         yield return new WaitForSeconds(60);
         //Assistant.SetActive(false);
+        Destroy(Assistant);
+        btnAssistant.GetComponentInChildren<TMP_Text>().text = "?";
         AssistantControl.gameObject.SetActive(false);
         Debug.Log("--- Assistant Killed ---");
     }

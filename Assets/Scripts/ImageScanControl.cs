@@ -87,7 +87,8 @@ public class ImageScanControl : MonoBehaviour
                 + " \n";
             if (trackedImage.trackingState == TrackingState.Limited)
             {
-                StartCoroutine(routine: CoroutineSample(aRObjects[i]));
+                //StartCoroutine(routine: CoroutineSample(aRObjects[i]));
+                aRObjects[i].SetActive(false);
             }
             if (trackedImage.trackingState == TrackingState.Tracking)
             {
@@ -152,9 +153,9 @@ public class ImageScanControl : MonoBehaviour
         scanButton.GetComponentInChildren<TMP_Text>().text = "STOP SCAN IMAGE";
     }
 
-    private IEnumerator CoroutineSample(GameObject gameObject)
+    /*private IEnumerator CoroutineSample(GameObject gameObject)
     {
         yield return new WaitForSeconds(10);
         gameObject.SetActive(false);
-    }
+    }*/
 }
