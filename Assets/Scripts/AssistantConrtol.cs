@@ -11,6 +11,7 @@ public class AssistantConrtol : MonoBehaviour
     private GameObject Assistant;
     [Header("В ячейку перенесите позицию Ассистента")]
     public Transform AssistantPosition;
+    public GameObject AssistantControl;
 
     void Awake()
     {
@@ -47,7 +48,8 @@ public class AssistantConrtol : MonoBehaviour
     private IEnumerator CoroutineSample()
     {
         yield return new WaitForSeconds(60);
-        Assistant.SetActive(false);
+        //Assistant.SetActive(false);
+        AssistantControl.gameObject.SetActive(false);
         Debug.Log("--- Assistant Killed ---");
     }
 }
