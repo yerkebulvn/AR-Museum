@@ -2009,6 +2009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arPrefabs:
   - {fileID: 1072995780090180633, guid: 1cee511888807b54d80cac31fe55ae42, type: 3}
+  - {fileID: 8271640206769718432, guid: 33c0e868f75f514469602b93ea7de512, type: 3}
   imageManager: {fileID: 787975991}
   scanButton: {fileID: 1068329826}
   debugText: {fileID: 357969049}
@@ -2026,6 +2027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArPrefabs:
   - {fileID: 5697459940439478203, guid: 7f762a837caccb54a84e3c162f547be2, type: 3}
+  - {fileID: 8252239054868670364, guid: cb2b3b984cc613e4485cfefd226a2d40, type: 3}
   trackedObjectManager: {fileID: 787975988}
   scanButton: {fileID: 1873725986}
   Infobox: {fileID: 2046293077}
