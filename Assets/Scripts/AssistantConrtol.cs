@@ -16,7 +16,7 @@ public class AssistantConrtol : MonoBehaviour
     public GameObject AssistantControl;
     public Button btnAssistant;
 
-    void Awake()
+    private void OnEnable()
     {
         // Появление Ассистента
         Assistant = Instantiate(AssistantPrefab, ARCamera.transform.position + new Vector3(0, 1f, 0), ARCamera.transform.rotation);

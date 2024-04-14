@@ -27,3 +27,13 @@ MonoBehaviour:
     m_SpecifySize: 1
     m_Name: metro2033
     m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5334419750787564826
+      m_GuidHigh: 12963917875647643545
+    m_SerializedTextureGuid:
+      m_GuidLow: 12741977925904786622
+      m_GuidHigh: 16370767032361677579
+    m_Size: {x: 0.297, y: 0.39575794}
+    m_SpecifySize: 1
+    m_Name: zaliev_nugman
+    m_Texture: {fileID: 0}
