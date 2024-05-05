@@ -25,7 +25,7 @@ public class ImageScanControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scanButton.GetComponentInChildren<TMP_Text>().text = "START SCAN IMAGE";
+        //scanButton.GetComponentInChildren<TMP_Text>().text = "START SCAN IMAGE";
     }
 
     void Awake()
@@ -145,13 +145,13 @@ public class ImageScanControl : MonoBehaviour
     {
         imageManager.enabled = false;
         Debug.Log("*** IMAGE SCAN STOPPED ***");
-        scanButton.GetComponentInChildren<TMP_Text>().text = "SCAN IMAGE";
+        //scanButton.GetComponentInChildren<TMP_Text>().text = "SCAN IMAGE";
     }
     void startScanImage()
     {
         imageManager.enabled = true;
         Debug.Log("*** IMAGE SCAN STARTED ***");
-        scanButton.GetComponentInChildren<TMP_Text>().text = "STOP SCAN IMAGE";
+        //scanButton.GetComponentInChildren<TMP_Text>().text = "STOP SCAN IMAGE";
     }
 
     /*private IEnumerator CoroutineSample(GameObject gameObject)

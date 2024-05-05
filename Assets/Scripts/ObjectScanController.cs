@@ -29,7 +29,7 @@ public class ScanController : MonoBehaviour
         //scanButton = GetComponent<Button>();
 
         // Настройте начальный текст кнопки.
-        scanButton.GetComponentInChildren<TMP_Text>().text = "START OBJECT SCAN";
+        scanButton.GetComponentInChildren<TMP_Text>().text = "SCAN";
     }
 
     void Awake()
@@ -48,14 +48,14 @@ public class ScanController : MonoBehaviour
             // Остановите сканирование объектов.
             trackedObjectManager.enabled = false;
             Debug.LogWarning("*** OBJECTS SCAN STOPPED ***");
-            scanButton.GetComponentInChildren<TMP_Text>().text = "SCAN OBJECT";
+            scanButton.GetComponentInChildren<TMP_Text>().text = "SCAN";
         }
         else
         {
             // Возобновите сканирование объектов.
             trackedObjectManager.enabled = true;
             Debug.Log("*** OBJECTS SCAN STARTED ***");
-            scanButton.GetComponentInChildren<TMP_Text>().text = "STOP OBJECTS SCAN";
+            scanButton.GetComponentInChildren<TMP_Text>().text = "STOP";
         }
 
         isScanning = !isScanning;
