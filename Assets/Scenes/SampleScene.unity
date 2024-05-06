@@ -2010,6 +2010,7 @@ MonoBehaviour:
   arPrefabs:
   - {fileID: 1072995780090180633, guid: 1cee511888807b54d80cac31fe55ae42, type: 3}
   - {fileID: 8271640206769718432, guid: 33c0e868f75f514469602b93ea7de512, type: 3}
+  - {fileID: 8271640206769718432, guid: 395e31765517ede4eb1f414266144539, type: 3}
   imageManager: {fileID: 787975991}
   scanButton: {fileID: 1068329826}
   debugText: {fileID: 357969049}
