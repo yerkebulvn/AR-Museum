@@ -9,6 +9,9 @@ using UnityEngine.XR.ARFoundation;
 using Firebase.Analytics;
 using UnityEngine.XR.ARSubsystems;
 using System.Collections;
+using Firebase.Database;
+using Firebase.Auth;
+using Unity.VisualScripting;
 
 
 public class ImageScanControl : MonoBehaviour
@@ -22,6 +25,10 @@ public class ImageScanControl : MonoBehaviour
     public Button scanButton;
     public TMP_Text debugText;
 
+    private DatabaseReference databaseReference;
+    private FirebaseAuth auth;
+    private bool isAdmin = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +41,37 @@ public class ImageScanControl : MonoBehaviour
         {
             FirebaseApp app = FirebaseApp.DefaultInstance;
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
+            auth = FirebaseAuth.DefaultInstance;
+            databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
         });
 
+        RetrieveData();
+
+    }
+
+    private void RetrieveData()
+    {
+        if (auth != null)
+        {
+            string UserID = auth.CurrentUser.UserId;
+            databaseReference.Child("Users").Child(UserID).Child("isAdmin").GetValueAsync().ContinueWith(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    Debug.LogError("Error retrieving data: " + task.Exception);
+                    return;
+                }
+
+                if (task.IsCompleted)
+                {
+                    DataSnapshot snapshot = task.Result;
+                    bool message = (bool)snapshot.Value; // Get bool with base
+
+                    // Update your TextMeshPro component
+                    isAdmin = message;
+                }
+            });
+        }
     }
 
     public void ToggleScan()
@@ -70,8 +106,11 @@ public class ImageScanControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(imageManager.enabled == true)
-        OutputTracking();
+        if (imageManager.enabled == true)
+        {
+            if(isAdmin)
+            OutputTracking();
+        }
     }
 
     void OutputTracking()

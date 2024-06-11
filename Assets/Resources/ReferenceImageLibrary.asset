@@ -47,3 +47,113 @@ MonoBehaviour:
     m_SpecifySize: 1
     m_Name: medal
     m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5183671200081865819
+      m_GuidHigh: 12568543866972730027
+    m_SerializedTextureGuid:
+      m_GuidLow: 3523107809000512908
+      m_GuidHigh: 5510104308936431291
+    m_Size: {x: 0.37929687, y: 0.5}
+    m_SpecifySize: 1
+    m_Name: gallery_zaliev
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5441823014535234616
+      m_GuidHigh: 3380040494683824005
+    m_SerializedTextureGuid:
+      m_GuidLow: 7761092043037204411
+      m_GuidHigh: 13852644877683333243
+    m_Size: {x: 0.38632813, y: 0.5}
+    m_SpecifySize: 1
+    m_Name: gallery_sheinesson
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5238386714639477421
+      m_GuidHigh: 486696721690668991
+    m_SerializedTextureGuid:
+      m_GuidLow: 924426588118002387
+      m_GuidHigh: 16302787387844320203
+    m_Size: {x: 0.39023438, y: 0.5}
+    m_SpecifySize: 1
+    m_Name: gallery_ospanov
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 4963048340963237805
+      m_GuidHigh: 467779356280167044
+    m_SerializedTextureGuid:
+      m_GuidLow: 2081817197054495164
+      m_GuidHigh: 749238311854455321
+    m_Size: {x: 0.39492187, y: 0.5}
+    m_SpecifySize: 1
+    m_Name: gallery_kantemirov
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 4745894457189205953
+      m_GuidHigh: 14415371290359819941
+    m_SerializedTextureGuid:
+      m_GuidLow: 14475869807151738382
+      m_GuidHigh: 14088295525664914858
+    m_Size: {x: 0.39453125, y: 0.5}
+    m_SpecifySize: 1
+    m_Name: gallery_pak
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5409260680397124976
+      m_GuidHigh: 2380063769429256370
+    m_SerializedTextureGuid:
+      m_GuidLow: 1906314373296893983
+      m_GuidHigh: 8863102210639547291
+    m_Size: {x: 0.38242188, y: 0.5}
+    m_SpecifySize: 1
+    m_Name: gallery_baimuhamedova
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5665128452790898684
+      m_GuidHigh: 10760161218358435470
+    m_SerializedTextureGuid:
+      m_GuidLow: 15421557019967728307
+      m_GuidHigh: 15275187282446191577
+    m_Size: {x: 0.41463414, y: 0.5002184}
+    m_SpecifySize: 1
+    m_Name: gallery_abuhanov
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5256124768849379395
+      m_GuidHigh: 8322370756900999064
+    m_SerializedTextureGuid:
+      m_GuidLow: 6031635778449651804
+      m_GuidHigh: 16650109234298443929
+    m_Size: {x: 0.37695312, y: 0.5}
+    m_SpecifySize: 1
+    m_Name: gallery_shetinin
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5412383791372258574
+      m_GuidHigh: 931717660196604045
+    m_SerializedTextureGuid:
+      m_GuidLow: 16434996934727740628
+      m_GuidHigh: 7921572051185245547
+    m_Size: {x: 0.38984376, y: 0.5}
+    m_SpecifySize: 1
+    m_Name: gallery_arynov
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5224344723520415568
+      m_GuidHigh: 9272264491473669298
+    m_SerializedTextureGuid:
+      m_GuidLow: 17254630628567757277
+      m_GuidHigh: 6192656360900837064
+    m_Size: {x: 0.3894531, y: 0.5}
+    m_SpecifySize: 1
+    m_Name: gallery_nuryshev
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 4625404820910296828
+      m_GuidHigh: 3536559504488079255
+    m_SerializedTextureGuid:
+      m_GuidLow: 6031463410318257377
+      m_GuidHigh: 8963226789933486315
+    m_Size: {x: 0.39101562, y: 0.5}
+    m_SpecifySize: 1
+    m_Name: gallery_nurmagambetov
+    m_Texture: {fileID: 0}

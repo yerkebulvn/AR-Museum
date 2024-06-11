@@ -1003,12 +1003,12 @@ Light:
   m_GameObject: {fileID: 705507993}
   m_Enabled: 1
   serializedVersion: 10
-  m_Type: 1
+  m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
+  m_Intensity: 3
+  m_Range: 20
+  m_SpotAngle: 53
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
@@ -1065,7 +1065,7 @@ Transform:
   m_GameObject: {fileID: 705507993}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0.75, y: 4.79, z: -1.3}
+  m_LocalPosition: {x: 3.41, y: 8, z: -5.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2011,6 +2011,18 @@ MonoBehaviour:
   - {fileID: 1072995780090180633, guid: 1cee511888807b54d80cac31fe55ae42, type: 3}
   - {fileID: 8271640206769718432, guid: 33c0e868f75f514469602b93ea7de512, type: 3}
   - {fileID: 8271640206769718432, guid: 395e31765517ede4eb1f414266144539, type: 3}
+  - {fileID: 8271640206769718432, guid: 79997f85ce585474e842389f2e4517ca, type: 3}
+  - {fileID: 8271640206769718432, guid: b34f438280b2b2d4f88f60efd33dfa59, type: 3}
+  - {fileID: 8271640206769718432, guid: e3643e3625274a7458e36964ea9b6022, type: 3}
+  - {fileID: 8271640206769718432, guid: 3d3126a51c480484ba9c4d814a789f44, type: 3}
+  - {fileID: 8271640206769718432, guid: 0ba67f8fd16c4ac4d9eb6a62fda390bf, type: 3}
+  - {fileID: 8271640206769718432, guid: d70f95281cacc0d43b821da46bb4f460, type: 3}
+  - {fileID: 8271640206769718432, guid: 0ad5bab3a79eb2f41ad5e91f9df324d4, type: 3}
+  - {fileID: 8271640206769718432, guid: 36c0b9375b6fea544a807193027e0345, type: 3}
+  - {fileID: 8271640206769718432, guid: 2d248c6542caf294baf177bb5ecc305e, type: 3}
+  - {fileID: 8271640206769718432, guid: b2770ec6313674b4dad1cc18a5a3c879, type: 3}
+  - {fileID: 8271640206769718432, guid: 3d3126a51c480484ba9c4d814a789f44, type: 3}
+  - {fileID: 8271640206769718432, guid: 9d82cfa2de2cdd74ab9d15d94fee03d0, type: 3}
   imageManager: {fileID: 787975991}
   scanButton: {fileID: 1068329826}
   debugText: {fileID: 357969049}
@@ -2027,7 +2039,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArPrefabs:
-  - {fileID: 5697459940439478203, guid: 7f762a837caccb54a84e3c162f547be2, type: 3}
   - {fileID: 8252239054868670364, guid: cb2b3b984cc613e4485cfefd226a2d40, type: 3}
   trackedObjectManager: {fileID: 787975988}
   scanButton: {fileID: 1873725986}
