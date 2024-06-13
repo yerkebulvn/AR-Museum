@@ -53,7 +53,7 @@ public class ImageScanControl : MonoBehaviour
 
     private void RetrieveData()
     {
-        
+        debugText.text = "Retrieving DATA";
             string UserID = auth.CurrentUser.UserId;
         /*databaseReference.Child("Users").Child(UserID).Child("isAdmin").GetValueAsync().ContinueWith(task =>
         {
@@ -79,6 +79,7 @@ public class ImageScanControl : MonoBehaviour
       if (task.IsFaulted)
       {
           // Handle the error...
+          Debug.LogError("ERROR WITH USER TYPE:" + task.Exception.ToString());
       }
       else if (task.IsCompleted)
       {
@@ -87,6 +88,7 @@ public class ImageScanControl : MonoBehaviour
           bool message = (bool)snapshot.Value; // Get bool with base
                                                // Update your TextMeshPro component
           isAdmin = message;
+          debugText.text = "You are admin!";
       }
   });
 
@@ -156,6 +158,7 @@ public class ImageScanControl : MonoBehaviour
 
     private void OnTrackedImageChanged(ARTrackedImagesChangedEventArgs eventArgs)
     {
+        debugText.text = "OnTrackedImageChanged";
 
         //Create object based on image tracked
         foreach (var trackedImage in eventArgs.added)
