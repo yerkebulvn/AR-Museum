@@ -49,7 +49,7 @@ public class ScanController : MonoBehaviour
             databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
         });
 
-        RetrieveData();
+        
 
     }
 
@@ -108,6 +108,7 @@ public class ScanController : MonoBehaviour
             trackedObjectManager.enabled = true;
             Debug.Log("*** OBJECTS SCAN STARTED ***");
             scanButton.GetComponentInChildren<TMP_Text>().text = "STOP";
+            RetrieveData();
         }
 
         isScanning = !isScanning;

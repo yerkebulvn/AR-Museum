@@ -34,7 +34,7 @@ public class ImageScanControl : MonoBehaviour
     void Start()
     {
         //scanButton.GetComponentInChildren<TMP_Text>().text = "START SCAN IMAGE";
-        databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+        
         
     }
 
@@ -45,9 +45,10 @@ public class ImageScanControl : MonoBehaviour
             FirebaseApp app = FirebaseApp.DefaultInstance;
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
             auth = FirebaseAuth.DefaultInstance;
+            databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
         });
 
-        RetrieveData();
+        
 
     }
 
@@ -212,6 +213,7 @@ public class ImageScanControl : MonoBehaviour
         imageManager.enabled = true;
         Debug.Log("*** IMAGE SCAN STARTED ***");
         //scanButton.GetComponentInChildren<TMP_Text>().text = "STOP SCAN IMAGE";
+        RetrieveData();
     }
 
     /*private IEnumerator CoroutineSample(GameObject gameObject)
