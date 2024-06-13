@@ -9,6 +9,7 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using Firebase.Database;
 using Firebase.Auth;
+using Firebase.Extensions;
 
 public class ScanController : MonoBehaviour
 {
@@ -54,27 +55,43 @@ public class ScanController : MonoBehaviour
 
     private void RetrieveData()
     {
-        if (auth != null)
+
+        string UserID = auth.CurrentUser.UserId;
+        /*databaseReference.Child("Users").Child(UserID).Child("isAdmin").GetValueAsync().ContinueWith(task =>
         {
-            string UserID = auth.CurrentUser.UserId;
-            databaseReference.Child("Users").Child(UserID).Child("isAdmin").GetValueAsync().ContinueWith(task =>
+            if (task.IsFaulted)
             {
-                if (task.IsFaulted)
-                {
-                    Debug.LogError("Error retrieving data: " + task.Exception);
-                    return;
-                }
+                Debug.LogError("Error retrieving data: " + task.Exception);
+                return;
+            }
 
-                if (task.IsCompleted)
-                {
-                    DataSnapshot snapshot = task.Result;
-                    bool message = (bool)snapshot.Value; // Get bool with base
+            if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                bool message = (bool)snapshot.Value; // Get bool with base
 
-                    // Update your TextMeshPro component
-                    isAdmin = message;
-                }
-            });
-        }
+                // Update your TextMeshPro component
+                isAdmin = message;
+            }
+        });*/
+
+        FirebaseDatabase.DefaultInstance
+  .GetReference("Users").Child(UserID).Child("isAdmin")
+  .GetValueAsync().ContinueWithOnMainThread(task => {
+      if (task.IsFaulted)
+      {
+          // Handle the error...
+      }
+      else if (task.IsCompleted)
+      {
+          DataSnapshot snapshot = task.Result;
+          // Do something with snapshot...
+          bool message = (bool)snapshot.Value; // Get bool with base
+                                               // Update your TextMeshPro component
+          isAdmin = message;
+      }
+  });
+
     }
     public void ToggleScan()
     {
@@ -111,7 +128,7 @@ public class ScanController : MonoBehaviour
     private void Update()
     {
         if (trackedObjectManager.enabled == true) { 
-            if(isAdmin) OutputTracking(); 
+            OutputTracking(); 
         }
     }
     void OutputTracking()
@@ -122,7 +139,7 @@ public class ScanController : MonoBehaviour
 
         foreach (var trackedObject in trackedObjectManager.trackables)
         {
-            Infobox.text += "Object: " + trackedObject.referenceObject.name + " "
+            if(isAdmin) Infobox.text += "Object: " + trackedObject.referenceObject.name + " "
                 + trackedObject.trackingState.ToString() + " "
                 + " \n";
             if(trackedObject.trackingState == TrackingState.Limited)

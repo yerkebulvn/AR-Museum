@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Firebase.Extensions;
 
 public class GetTextFromDatabase : MonoBehaviour
 {
@@ -15,11 +16,13 @@ public class GetTextFromDatabase : MonoBehaviour
     private void Start()
     {
         // Initialize Firebase
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+        /*FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
             FirebaseApp app = FirebaseApp.DefaultInstance;
             databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
-        });
+        });*/
+
+        databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
 
         // Retrieve data
         RetrieveData();
@@ -28,7 +31,7 @@ public class GetTextFromDatabase : MonoBehaviour
     private void RetrieveData()
     {
         // Replace "messages" with your specific node in the database
-        databaseReference.Child("Artefacts").Child(ARTEFACT).Child("text").GetValueAsync().ContinueWith(task =>
+        /*databaseReference.Child("Artefacts").Child(ARTEFACT).Child("text").GetValueAsync().ContinueWith(task =>
         {
             if (task.IsFaulted)
             {
@@ -44,6 +47,26 @@ public class GetTextFromDatabase : MonoBehaviour
                 // Update your TextMeshPro component
                 textMeshPro.text = message;
             }
-        });
+        });*/
+
+        FirebaseDatabase.DefaultInstance
+      .GetReference("Artefacts").Child(ARTEFACT).Child("text")
+      .GetValueAsync().ContinueWithOnMainThread(task => {
+          if (task.IsFaulted)
+          {
+              // Handle the error...
+              Debug.LogError("Error retrieving data: " + task.Exception);
+              return;
+          }
+          else if (task.IsCompleted)
+          {
+              DataSnapshot snapshot = task.Result;
+              // Do something with snapshot...
+              string message = snapshot.Value.ToString(); // Get the message data
+
+              // Update your TextMeshPro component
+              textMeshPro.text = message;
+          }
+      });
     }
 }

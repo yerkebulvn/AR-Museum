@@ -12,6 +12,7 @@ using System.Collections;
 using Firebase.Database;
 using Firebase.Auth;
 using Unity.VisualScripting;
+using Firebase.Extensions;
 
 
 public class ImageScanControl : MonoBehaviour
@@ -51,27 +52,43 @@ public class ImageScanControl : MonoBehaviour
 
     private void RetrieveData()
     {
-        if (auth != null)
-        {
+        
             string UserID = auth.CurrentUser.UserId;
-            databaseReference.Child("Users").Child(UserID).Child("isAdmin").GetValueAsync().ContinueWith(task =>
+        /*databaseReference.Child("Users").Child(UserID).Child("isAdmin").GetValueAsync().ContinueWith(task =>
+        {
+            if (task.IsFaulted)
             {
-                if (task.IsFaulted)
-                {
-                    Debug.LogError("Error retrieving data: " + task.Exception);
-                    return;
-                }
+                Debug.LogError("Error retrieving data: " + task.Exception);
+                return;
+            }
 
-                if (task.IsCompleted)
-                {
-                    DataSnapshot snapshot = task.Result;
-                    bool message = (bool)snapshot.Value; // Get bool with base
+            if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                bool message = (bool)snapshot.Value; // Get bool with base
 
-                    // Update your TextMeshPro component
-                    isAdmin = message;
-                }
-            });
-        }
+                // Update your TextMeshPro component
+                isAdmin = message;
+            }
+        });*/
+
+        FirebaseDatabase.DefaultInstance
+  .GetReference("Users").Child(UserID).Child("isAdmin")
+  .GetValueAsync().ContinueWithOnMainThread(task => {
+      if (task.IsFaulted)
+      {
+          // Handle the error...
+      }
+      else if (task.IsCompleted)
+      {
+          DataSnapshot snapshot = task.Result;
+          // Do something with snapshot...
+          bool message = (bool)snapshot.Value; // Get bool with base
+                                               // Update your TextMeshPro component
+          isAdmin = message;
+      }
+  });
+
     }
 
     public void ToggleScan()
@@ -108,7 +125,6 @@ public class ImageScanControl : MonoBehaviour
     {
         if (imageManager.enabled == true)
         {
-            if(isAdmin)
             OutputTracking();
         }
     }
@@ -121,7 +137,7 @@ public class ImageScanControl : MonoBehaviour
 
         foreach (var trackedImage in imageManager.trackables)
         {
-            debugText.text += "Image: " + trackedImage.referenceImage.name + " "
+            if(isAdmin) debugText.text += "Image: " + trackedImage.referenceImage.name + " "
                 + trackedImage.trackingState.ToString() + " "
                 + " \n";
             if (trackedImage.trackingState == TrackingState.Limited)
