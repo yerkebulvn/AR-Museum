@@ -80,6 +80,7 @@ public class ImageScanControl : MonoBehaviour
       {
           // Handle the error...
           Debug.LogError("ERROR WITH USER TYPE:" + task.Exception.ToString());
+          debugText.text = task.Exception.ToString();
       }
       else if (task.IsCompleted)
       {
