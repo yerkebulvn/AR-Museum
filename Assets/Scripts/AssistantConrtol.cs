@@ -57,4 +57,9 @@ public class AssistantConrtol : MonoBehaviour
         AssistantControl.gameObject.SetActive(false);
         Debug.Log("--- Assistant Killed ---");
     }
+
+    private void OnDisable()
+    {
+        Destroy(Assistant);
+    }
 }
