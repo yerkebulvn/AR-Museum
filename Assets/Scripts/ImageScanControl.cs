@@ -34,6 +34,8 @@ public class ImageScanControl : MonoBehaviour
     void Start()
     {
         //scanButton.GetComponentInChildren<TMP_Text>().text = "START SCAN IMAGE";
+        databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+        
     }
 
     void Awake()
@@ -43,7 +45,6 @@ public class ImageScanControl : MonoBehaviour
             FirebaseApp app = FirebaseApp.DefaultInstance;
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
             auth = FirebaseAuth.DefaultInstance;
-            databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
         });
 
         RetrieveData();
