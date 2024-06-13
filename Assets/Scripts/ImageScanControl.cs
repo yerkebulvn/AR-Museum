@@ -20,7 +20,7 @@ public class ImageScanControl : MonoBehaviour
 
     public GameObject[] arPrefabs;
     /* [SerializeField] private ARTrackedImageManager imageManager; */
-    private ARTrackedImageManager imageManager = GameObject.FindGameObjectWithTag("XROrigin").GetComponent<ARTrackedImageManager>();
+    private ARTrackedImageManager imageManager;
     List<GameObject> aRObjects = new List<GameObject>();
 
     private bool isScanning = false;
@@ -45,6 +45,7 @@ public class ImageScanControl : MonoBehaviour
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
             auth = FirebaseAuth.DefaultInstance;
             databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+
         });
 
     }
@@ -112,6 +113,7 @@ public class ImageScanControl : MonoBehaviour
 
     private void OnEnable()
     {
+        imageManager = GameObject.FindGameObjectWithTag("XROrigin").GetComponent<ARTrackedImageManager>();
         // Подпишитесь на событие обнаружения объекта.
         if (imageManager.enabled == true)
             imageManager.trackedImagesChanged += OnTrackedImageChanged;
@@ -119,6 +121,7 @@ public class ImageScanControl : MonoBehaviour
 
     private void OnDisable()
     {
+        imageManager = GameObject.FindGameObjectWithTag("XROrigin").GetComponent<ARTrackedImageManager>();
         // Отпишитесь от события обнаружения объекта.
         if (imageManager.enabled == true)
             imageManager.trackedImagesChanged -= OnTrackedImageChanged;
