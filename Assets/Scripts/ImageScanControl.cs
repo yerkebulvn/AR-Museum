@@ -35,7 +35,6 @@ public class ImageScanControl : MonoBehaviour
     {
         //scanButton.GetComponentInChildren<TMP_Text>().text = "START SCAN IMAGE";
         
-        
     }
 
     void Awake()
@@ -47,8 +46,6 @@ public class ImageScanControl : MonoBehaviour
             auth = FirebaseAuth.DefaultInstance;
             databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
         });
-
-        
 
     }
 
@@ -116,13 +113,15 @@ public class ImageScanControl : MonoBehaviour
     private void OnEnable()
     {
         // Подпишитесь на событие обнаружения объекта.
-        imageManager.trackedImagesChanged += OnTrackedImageChanged;
+        if (imageManager.enabled == true)
+            imageManager.trackedImagesChanged += OnTrackedImageChanged;
     }
 
     private void OnDisable()
     {
         // Отпишитесь от события обнаружения объекта.
-        imageManager.trackedImagesChanged -= OnTrackedImageChanged;
+        if (imageManager.enabled == true)
+            imageManager.trackedImagesChanged -= OnTrackedImageChanged;
     }
 
     // Update is called once per frame

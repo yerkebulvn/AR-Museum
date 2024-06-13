@@ -21,4 +21,9 @@ public class SignOutListener : MonoBehaviour
     {
         SceneManager.LoadScene("museum360");
     }
+
+    public void goToObjectListScene()
+    {
+        SceneManager.LoadScene("ObjectsList");
+    }
 }

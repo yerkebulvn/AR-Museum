@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Laptop
+  - ViewController
+  - MenuCanvas
   layers:
   - Default
   - TransparentFX

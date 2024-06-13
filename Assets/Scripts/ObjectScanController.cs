@@ -22,8 +22,6 @@ public class ScanController : MonoBehaviour
     public Button scanButton;
     public TMP_Text Infobox;
 
-    private DatabaseReference databaseReference;
-    private FirebaseAuth auth;
     private bool isAdmin = false;
 
     private void Start()
@@ -45,54 +43,11 @@ public class ScanController : MonoBehaviour
         {
             FirebaseApp app = FirebaseApp.DefaultInstance;
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
-            auth = FirebaseAuth.DefaultInstance;
-            databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
         });
 
-        
-
     }
 
-    private void RetrieveData()
-    {
-
-        string UserID = auth.CurrentUser.UserId;
-        /*databaseReference.Child("Users").Child(UserID).Child("isAdmin").GetValueAsync().ContinueWith(task =>
-        {
-            if (task.IsFaulted)
-            {
-                Debug.LogError("Error retrieving data: " + task.Exception);
-                return;
-            }
-
-            if (task.IsCompleted)
-            {
-                DataSnapshot snapshot = task.Result;
-                bool message = (bool)snapshot.Value; // Get bool with base
-
-                // Update your TextMeshPro component
-                isAdmin = message;
-            }
-        });*/
-
-        FirebaseDatabase.DefaultInstance
-  .GetReference("Users").Child(UserID).Child("isAdmin")
-  .GetValueAsync().ContinueWithOnMainThread(task => {
-      if (task.IsFaulted)
-      {
-          // Handle the error...
-      }
-      else if (task.IsCompleted)
-      {
-          DataSnapshot snapshot = task.Result;
-          // Do something with snapshot...
-          bool message = (bool)snapshot.Value; // Get bool with base
-                                               // Update your TextMeshPro component
-          isAdmin = message;
-      }
-  });
-
-    }
+    
     public void ToggleScan()
     {
         if (isScanning)
@@ -108,7 +63,6 @@ public class ScanController : MonoBehaviour
             trackedObjectManager.enabled = true;
             Debug.Log("*** OBJECTS SCAN STARTED ***");
             scanButton.GetComponentInChildren<TMP_Text>().text = "STOP";
-            RetrieveData();
         }
 
         isScanning = !isScanning;
@@ -117,13 +71,15 @@ public class ScanController : MonoBehaviour
     private void OnEnable()
     {
         // Подпишитесь на событие обнаружения объекта.
-        trackedObjectManager.trackedObjectsChanged += OnTrackedObjectsChanged;
+        if(trackedObjectManager.enabled == true)
+            trackedObjectManager.trackedObjectsChanged += OnTrackedObjectsChanged;
     }
 
     private void OnDisable()
     {
         // Отпишитесь от события обнаружения объекта.
-        trackedObjectManager.trackedObjectsChanged -= OnTrackedObjectsChanged;
+        if (trackedObjectManager.enabled == true)
+            trackedObjectManager.trackedObjectsChanged -= OnTrackedObjectsChanged;
     }
 
     private void Update()
@@ -140,9 +96,9 @@ public class ScanController : MonoBehaviour
 
         foreach (var trackedObject in trackedObjectManager.trackables)
         {
-            if(isAdmin) Infobox.text += "Object: " + trackedObject.referenceObject.name + " "
-                + trackedObject.trackingState.ToString() + " "
-                + " \n";
+            //Infobox.text += "Object: " + trackedObject.referenceObject.name + " "
+              //  + trackedObject.trackingState.ToString() + " "
+               // + " \n";
             if(trackedObject.trackingState == TrackingState.Limited)
             {
                 ARObjects[i].SetActive(false);

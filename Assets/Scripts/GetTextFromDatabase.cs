@@ -30,24 +30,6 @@ public class GetTextFromDatabase : MonoBehaviour
 
     private void RetrieveData()
     {
-        // Replace "messages" with your specific node in the database
-        /*databaseReference.Child("Artefacts").Child(ARTEFACT).Child("text").GetValueAsync().ContinueWith(task =>
-        {
-            if (task.IsFaulted)
-            {
-                Debug.LogError("Error retrieving data: " + task.Exception);
-                return;
-            }
-
-            if (task.IsCompleted)
-            {
-                DataSnapshot snapshot = task.Result;
-                string message = snapshot.Value.ToString(); // Get the message data
-
-                // Update your TextMeshPro component
-                textMeshPro.text = message;
-            }
-        });*/
 
         FirebaseDatabase.DefaultInstance
       .GetReference("Artefacts").Child(ARTEFACT).Child("text")
