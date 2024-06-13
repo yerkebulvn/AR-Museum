@@ -19,7 +19,8 @@ public class ImageScanControl : MonoBehaviour
 {
 
     public GameObject[] arPrefabs;
-    [SerializeField] private ARTrackedImageManager imageManager;
+    /* [SerializeField] private ARTrackedImageManager imageManager; */
+    private ARTrackedImageManager imageManager = GameObject.FindGameObjectWithTag("XROrigin").GetComponent<ARTrackedImageManager>();
     List<GameObject> aRObjects = new List<GameObject>();
 
     private bool isScanning = false;
@@ -34,7 +35,6 @@ public class ImageScanControl : MonoBehaviour
     void Start()
     {
         //scanButton.GetComponentInChildren<TMP_Text>().text = "START SCAN IMAGE";
-        
     }
 
     void Awake()
