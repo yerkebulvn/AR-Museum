@@ -2308,8 +2308,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 8271640206769718432, guid: 0ad5bab3a79eb2f41ad5e91f9df324d4, type: 3}
+  - {fileID: 5535415898268936276, guid: 7138db41678eae747ba389cb58884007, type: 3}
   - {fileID: 8271640206769718432, guid: 395e31765517ede4eb1f414266144539, type: 3}
+  - {fileID: 5535415898268936276, guid: 89d86d12b77e18944afbc2a5ca303ad1, type: 3}
   ARCamera: {fileID: 370011400}
   infoCanvas: {fileID: 2095967162}
   textMeshPro: {fileID: 1158572934}
@@ -2466,12 +2467,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allExhibits:
-  - Name: "\u0492. \u0410. \u0410\u0431\u0443\u0445\u0430\u043D\u043E\u0432"
+  - Name: "\u0417\u0430\u043B\u0438\u0435\u0432 \u041D\u04B1\u0493\u043C\u0430\u043D"
+    Icon: {fileID: 21300000, guid: 62b08f00e408ba848917ec9013d83977, type: 3}
+    codename: gallery_zaliev
+  - Name: "\u0410\u0431\u0443\u0445\u0430\u043D\u043E\u0432"
     Icon: {fileID: 21300000, guid: c38f11033f253cd4897c988966cdc902, type: 3}
     codename: gallery_abuhanov
-  - Name: Medal
-    Icon: {fileID: 21300000, guid: e5fb6a73fdf00d34691426c57f3ac031, type: 3}
-    codename: medal
 --- !u!1 &1661865212
 GameObject:
   m_ObjectHideFlags: 0

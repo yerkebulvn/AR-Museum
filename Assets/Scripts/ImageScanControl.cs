@@ -27,7 +27,7 @@ public class ImageScanControl : MonoBehaviour
     public Button scanButton;
     public TMP_Text debugText;
 
-    private DatabaseReference databaseReference;
+    //private DatabaseReference databaseReference;
     private FirebaseAuth auth;
     private bool isAdmin = false;
 
@@ -35,6 +35,7 @@ public class ImageScanControl : MonoBehaviour
     void Start()
     {
         //scanButton.GetComponentInChildren<TMP_Text>().text = "START SCAN IMAGE";
+        imageManager = GameObject.FindGameObjectWithTag("XROrigin").GetComponent<ARTrackedImageManager>();
     }
 
     void Awake()
@@ -44,33 +45,14 @@ public class ImageScanControl : MonoBehaviour
             FirebaseApp app = FirebaseApp.DefaultInstance;
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
             auth = FirebaseAuth.DefaultInstance;
-            databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
-
+            //databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
         });
 
     }
 
-    private void RetrieveData()
+    /*private void RetrieveData()
     {
-        debugText.text = "Retrieving DATA";
-            string UserID = auth.CurrentUser.UserId;
-        /*databaseReference.Child("Users").Child(UserID).Child("isAdmin").GetValueAsync().ContinueWith(task =>
-        {
-            if (task.IsFaulted)
-            {
-                Debug.LogError("Error retrieving data: " + task.Exception);
-                return;
-            }
-
-            if (task.IsCompleted)
-            {
-                DataSnapshot snapshot = task.Result;
-                bool message = (bool)snapshot.Value; // Get bool with base
-
-                // Update your TextMeshPro component
-                isAdmin = message;
-            }
-        });*/
+        
 
         FirebaseDatabase.DefaultInstance
   .GetReference("Users").Child(UserID).Child("isAdmin")
@@ -92,7 +74,7 @@ public class ImageScanControl : MonoBehaviour
       }
   });
 
-    }
+    }*/
 
     public void ToggleScan()
     {
@@ -113,7 +95,6 @@ public class ImageScanControl : MonoBehaviour
 
     private void OnEnable()
     {
-        imageManager = GameObject.FindGameObjectWithTag("XROrigin").GetComponent<ARTrackedImageManager>();
         // Подпишитесь на событие обнаружения объекта.
         if (imageManager.enabled == true)
             imageManager.trackedImagesChanged += OnTrackedImageChanged;
@@ -121,7 +102,6 @@ public class ImageScanControl : MonoBehaviour
 
     private void OnDisable()
     {
-        imageManager = GameObject.FindGameObjectWithTag("XROrigin").GetComponent<ARTrackedImageManager>();
         // Отпишитесь от события обнаружения объекта.
         if (imageManager.enabled == true)
             imageManager.trackedImagesChanged -= OnTrackedImageChanged;
@@ -215,7 +195,7 @@ public class ImageScanControl : MonoBehaviour
         imageManager.enabled = true;
         Debug.Log("*** IMAGE SCAN STARTED ***");
         //scanButton.GetComponentInChildren<TMP_Text>().text = "STOP SCAN IMAGE";
-        RetrieveData();
+        //RetrieveData();
     }
 
     /*private IEnumerator CoroutineSample(GameObject gameObject)
