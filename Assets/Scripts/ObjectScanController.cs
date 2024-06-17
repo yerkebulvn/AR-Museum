@@ -13,6 +13,7 @@ using Firebase.Extensions;
 
 public class ScanController : MonoBehaviour
 {
+
     public GameObject[] ArPrefabs;
     [SerializeField] private ARTrackedObjectManager trackedObjectManager;
     private bool isScanning = false;

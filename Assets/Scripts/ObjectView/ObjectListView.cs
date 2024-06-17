@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -53,6 +54,8 @@ public class ObjectListView : MonoBehaviour
         Debug.Log("------------item " + itemIndex + " clicked---------------");
         Debug.Log("name " + allExhibits[itemIndex].Name);
         GameObject.FindGameObjectWithTag("ViewController").GetComponent<ObjectViewLogic>().spawnObject(allExhibits[itemIndex].codename);
-        transform.parent.gameObject.SetActive(false);
+        GameObject.FindGameObjectsWithTag("MenuCanvas")[0].SetActive(false);
+        FirebaseAnalytics.LogEvent("ObjectView", "ImageName", allExhibits[itemIndex].codename);
+        FirebaseAnalytics.LogEvent("ObjectViewListSelected: " + allExhibits[itemIndex].codename);
     }
 }

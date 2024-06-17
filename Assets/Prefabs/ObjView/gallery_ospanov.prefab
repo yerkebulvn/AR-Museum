@@ -63,7 +63,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 723df72ec56a75b4c80a6f8f7489c059, type: 2}
   - {fileID: 2100000, guid: 96e6d0ce7539472468cfd05b60034141, type: 2}
-  - {fileID: 2100000, guid: 1aa335b55203d004aa6db7901c850b42, type: 2}
+  - {fileID: 2100000, guid: 56b63d4685f2eaa4d97be411ef6b9782, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1883978812032784432}
   m_Layer: 0
-  m_Name: gallery_abuhanov
+  m_Name: gallery_ospanov
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

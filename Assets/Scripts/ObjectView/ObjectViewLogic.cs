@@ -12,6 +12,7 @@ public class ObjectViewLogic : MonoBehaviour
     private GameObject exhibit;
     public GameObject ARCamera;
     public GameObject infoCanvas;
+    public GameObject MainCanvas;
     public TextMeshProUGUI textMeshPro;
 
     private DatabaseReference databaseReference;
@@ -34,8 +35,8 @@ public class ObjectViewLogic : MonoBehaviour
             if (prefab.name == objectName)
             {
                 infoCanvas.SetActive(true);
-                textMeshPro.text = RetrieveData(objectName);
-                exhibit = Instantiate(prefab, ARCamera.transform.position + new Vector3(0, 0, 0.5f), ARCamera.transform.rotation); break;
+                RetrieveData(objectName);
+                exhibit = Instantiate(prefab, ARCamera.transform.position + new Vector3(0, 0, 1.5f), ARCamera.transform.rotation); break;
             }
         }
     }
@@ -43,13 +44,13 @@ public class ObjectViewLogic : MonoBehaviour
     public void backButtonPressed()
     {
         Destroy(exhibit);
-        GameObject.FindGameObjectWithTag("MenuCanvas").SetActive(true);
+        MainCanvas.SetActive(true);
         infoCanvas.SetActive(false);
     }
-
+    /*
     private string RetrieveData(string ARTEFACT)
     {
-        string result = "";
+        string result = "Default Text";
 
         FirebaseDatabase.DefaultInstance
       .GetReference("Artefacts").Child(ARTEFACT).Child("text")
@@ -72,6 +73,26 @@ public class ObjectViewLogic : MonoBehaviour
       });
 
         return result;
+    }*/
+
+    private void RetrieveData(string ARTEFACT)
+    {
+        FirebaseDatabase.DefaultInstance
+          .GetReference("Artefacts").Child(ARTEFACT).Child("text")
+          .GetValueAsync().ContinueWithOnMainThread(task =>
+          {
+              if (task.IsFaulted)
+              {
+                  // Handle the error...
+                  Debug.LogError("Error retrieving data: " + task.Exception);
+              }
+              else if (task.IsCompleted)
+              {
+                  DataSnapshot snapshot = task.Result;
+                  // Update UI here with snapshot data
+                  textMeshPro.text = snapshot.Value.ToString();
+              }
+          });
     }
 
     public void goToMainScene()

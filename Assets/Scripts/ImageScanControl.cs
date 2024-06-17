@@ -20,7 +20,7 @@ public class ImageScanControl : MonoBehaviour
 
     public GameObject[] arPrefabs;
     /* [SerializeField] private ARTrackedImageManager imageManager; */
-    private ARTrackedImageManager imageManager;
+    [SerializeField] private ARTrackedImageManager imageManager;
     List<GameObject> aRObjects = new List<GameObject>();
 
     private bool isScanning = false;
@@ -29,17 +29,17 @@ public class ImageScanControl : MonoBehaviour
 
     //private DatabaseReference databaseReference;
     private FirebaseAuth auth;
-    private bool isAdmin = false;
 
     // Start is called before the first frame update
     void Start()
     {
         //scanButton.GetComponentInChildren<TMP_Text>().text = "START SCAN IMAGE";
-        imageManager = GameObject.FindGameObjectWithTag("XROrigin").GetComponent<ARTrackedImageManager>();
     }
 
     void Awake()
     {
+        imageManager = GetComponent<ARTrackedImageManager>();
+
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
             FirebaseApp app = FirebaseApp.DefaultInstance;
@@ -124,12 +124,11 @@ public class ImageScanControl : MonoBehaviour
 
         foreach (var trackedImage in imageManager.trackables)
         {
-            if(isAdmin) debugText.text += "Image: " + trackedImage.referenceImage.name + " "
+            debugText.text += "Image: " + trackedImage.referenceImage.name + " "
                 + trackedImage.trackingState.ToString() + " "
                 + " \n";
             if (trackedImage.trackingState == TrackingState.Limited)
             {
-                //StartCoroutine(routine: CoroutineSample(aRObjects[i]));
                 aRObjects[i].SetActive(false);
             }
             if (trackedImage.trackingState == TrackingState.Tracking)
@@ -154,9 +153,12 @@ public class ImageScanControl : MonoBehaviour
                     Debug.Log("***** Detected Image: " + trackedImage.referenceImage.name);
                     var newPrefab = Instantiate(arPrefab, trackedImage.transform);
                     aRObjects.Add(newPrefab);
-                    
-                    FirebaseAnalytics.LogEvent("DetectedImage", "ImageName", trackedImage.referenceImage.name.ToString());
-                    FirebaseAnalytics.LogEvent(trackedImage.referenceImage.name.ToString());
+
+                    for (int i = 0; i < 5; i++)
+                    {
+                        FirebaseAnalytics.LogEvent("DetectedImage", "ImageName", trackedImage.referenceImage.name.ToString());
+                        FirebaseAnalytics.LogEvent(trackedImage.referenceImage.name.ToString());
+                    }
                 }
             }
         }
@@ -198,9 +200,4 @@ public class ImageScanControl : MonoBehaviour
         //RetrieveData();
     }
 
-    /*private IEnumerator CoroutineSample(GameObject gameObject)
-    {
-        yield return new WaitForSeconds(10);
-        gameObject.SetActive(false);
-    }*/
 }

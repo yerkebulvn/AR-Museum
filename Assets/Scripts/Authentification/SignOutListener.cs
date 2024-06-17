@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,11 +20,13 @@ public class SignOutListener : MonoBehaviour
 
     public void goTo360scene()
     {
+        FirebaseAnalytics.LogEvent("Museum360Click");
         SceneManager.LoadScene("museum360");
     }
 
     public void goToObjectListScene()
     {
+        FirebaseAnalytics.LogEvent("ObjectsListOpen");
         SceneManager.LoadScene("ObjectsList");
     }
 }
