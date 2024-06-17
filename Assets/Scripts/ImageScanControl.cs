@@ -38,43 +38,15 @@ public class ImageScanControl : MonoBehaviour
 
     void Awake()
     {
-        imageManager = GetComponent<ARTrackedImageManager>();
 
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
             FirebaseApp app = FirebaseApp.DefaultInstance;
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
-            auth = FirebaseAuth.DefaultInstance;
             //databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
         });
 
     }
-
-    /*private void RetrieveData()
-    {
-        
-
-        FirebaseDatabase.DefaultInstance
-  .GetReference("Users").Child(UserID).Child("isAdmin")
-  .GetValueAsync().ContinueWithOnMainThread(task => {
-      if (task.IsFaulted)
-      {
-          // Handle the error...
-          Debug.LogError("ERROR WITH USER TYPE:" + task.Exception.ToString());
-          debugText.text = task.Exception.ToString();
-      }
-      else if (task.IsCompleted)
-      {
-          DataSnapshot snapshot = task.Result;
-          // Do something with snapshot...
-          bool message = (bool)snapshot.Value; // Get bool with base
-                                               // Update your TextMeshPro component
-          isAdmin = message;
-          debugText.text = "You are admin!";
-      }
-  });
-
-    }*/
 
     public void ToggleScan()
     {
@@ -127,14 +99,14 @@ public class ImageScanControl : MonoBehaviour
             debugText.text += "Image: " + trackedImage.referenceImage.name + " "
                 + trackedImage.trackingState.ToString() + " "
                 + " \n";
-            if (trackedImage.trackingState == TrackingState.Limited)
+            /*if (trackedImage.trackingState == TrackingState.Limited)
             {
                 aRObjects[i].SetActive(false);
             }
             if (trackedImage.trackingState == TrackingState.Tracking)
             {
                 aRObjects[i].SetActive(true);
-            }
+            }*/
             i++;
         }
     }
