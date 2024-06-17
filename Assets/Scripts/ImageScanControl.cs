@@ -160,6 +160,7 @@ public class ImageScanControl : MonoBehaviour
     }
     void stopScanImage()
     {
+        OnDisable();
         imageManager.enabled = false;
         Debug.Log("*** IMAGE SCAN STOPPED ***");
         //scanButton.GetComponentInChildren<TMP_Text>().text = "SCAN IMAGE";
@@ -167,6 +168,7 @@ public class ImageScanControl : MonoBehaviour
     void startScanImage()
     {
         imageManager.enabled = true;
+        OnEnable();
         Debug.Log("*** IMAGE SCAN STARTED ***");
         //scanButton.GetComponentInChildren<TMP_Text>().text = "STOP SCAN IMAGE";
         //RetrieveData();
