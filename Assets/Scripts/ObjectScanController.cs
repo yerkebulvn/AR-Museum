@@ -23,8 +23,6 @@ public class ScanController : MonoBehaviour
     public Button scanButton;
     public TMP_Text Infobox;
 
-    private bool isAdmin = false;
-
     private void Start()
     {
         // Настройте кнопку в вашем интерфейсе пользователя (UI).
@@ -85,9 +83,9 @@ public class ScanController : MonoBehaviour
 
     private void Update()
     {
-        if (trackedObjectManager.enabled == true) { 
+        /*if (trackedObjectManager.enabled == true) { 
             OutputTracking(); 
-        }
+        }*/
     }
     void OutputTracking()
     {

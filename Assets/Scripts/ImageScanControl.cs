@@ -82,10 +82,10 @@ public class ImageScanControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (imageManager.enabled == true)
+        /*if (imageManager.enabled == true)
         {
             OutputTracking();
-        }
+        }*/
     }
 
     void OutputTracking()
@@ -126,11 +126,9 @@ public class ImageScanControl : MonoBehaviour
                     var newPrefab = Instantiate(arPrefab, trackedImage.transform);
                     aRObjects.Add(newPrefab);
 
-                    for (int i = 0; i < 5; i++)
-                    {
-                        FirebaseAnalytics.LogEvent("DetectedImage", "ImageName", trackedImage.referenceImage.name.ToString());
-                        FirebaseAnalytics.LogEvent(trackedImage.referenceImage.name.ToString());
-                    }
+                    FirebaseAnalytics.LogEvent("DetectedImage", "ImageName", trackedImage.referenceImage.name.ToString());
+                    FirebaseAnalytics.LogEvent(trackedImage.referenceImage.name.ToString());
+                    
                 }
             }
         }
@@ -160,7 +158,7 @@ public class ImageScanControl : MonoBehaviour
     }
     void stopScanImage()
     {
-        OnDisable();
+        imageManager.trackedImagesChanged -= OnTrackedImageChanged;
         imageManager.enabled = false;
         Debug.Log("*** IMAGE SCAN STOPPED ***");
         //scanButton.GetComponentInChildren<TMP_Text>().text = "SCAN IMAGE";
@@ -168,7 +166,7 @@ public class ImageScanControl : MonoBehaviour
     void startScanImage()
     {
         imageManager.enabled = true;
-        OnEnable();
+        imageManager.trackedImagesChanged += OnTrackedImageChanged;
         Debug.Log("*** IMAGE SCAN STARTED ***");
         //scanButton.GetComponentInChildren<TMP_Text>().text = "STOP SCAN IMAGE";
         //RetrieveData();
